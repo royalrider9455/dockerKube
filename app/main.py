@@ -12,7 +12,7 @@ POSTGRES_HOST = os.environ['POSTGRES_HOST']
 POSTGRES_USER = os.environ['POSTGRES_USER']
 POSTGRES_PORT = os.environ['POSTGRES_PORT']
 POSTGRES_DB = os.environ['POSTGRES_DB']
-POSTGRES_PASSWORD = os.environ['PGPASSWORD']
+POSTGRES_PASSWORD = os.environ['DATABASEPASSWORD']
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
 
@@ -25,17 +25,6 @@ db.init_app(app)
 with app.app_context():
     # To create / use database mentioned in URI
     db.create_all()
-    db.session.commit()
-    demo_record_a = TraineerTech(name="Demo Data 1", tech="Devops", rating="5")
-    demo_record_b = TraineerTech(name="Demo Data 2", tech="Docker", rating="6")
-    demo_record_c = TraineerTech(name="Demo Data 3", tech="Python", rating="7")
-    demo_record_d = TraineerTech(name="Demo Data 4", tech="Kubernetes", rating="8")
-    demo_record_e = TraineerTech(name="Demo Data 5", tech="Jenkins", rating="9")
-    db.session.add(demo_record_a)
-    db.session.add(demo_record_b)
-    db.session.add(demo_record_c)
-    db.session.add(demo_record_d)
-    db.session.add(demo_record_e)
     db.session.commit()
 
 red = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=0)

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: web-deployment
+  name: api-deployment
 
 spec:
   replicas: 4
@@ -28,12 +28,12 @@ spec:
             - name: POSTGRES_PORT
               value: '5432'
             - name: POSTGRES_DB
-              value: hello_flask_db
-            - name: PGPASSWORD
+              value: docker_kube_db
+            - name: DATABASEPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: pgpassword
-                  key: PGPASSWORD
+                  name: databasepassword
+                  key: DATABASEPASSWORD
 
   selector:
     matchLabels:
