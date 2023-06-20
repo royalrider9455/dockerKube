@@ -35,12 +35,6 @@ spec:
                   name: pgpassword
                   key: PGPASSWORD
 
-  updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-
   selector:
     matchLabels:
       component: dockerkube-app
