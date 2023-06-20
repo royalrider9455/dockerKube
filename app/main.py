@@ -50,7 +50,7 @@ def save():
         record =  UserFavs.query.filter_by(username=username).first()
         print("Records fecthed from db:", record)
         
-        if record: 
+        if record:
             red.hset(username, "place", place)
             red.hset(username, "food", food)
             # return a msg to the template, saying the user already exists(from database)
