@@ -38,3 +38,8 @@ spec:
   selector:
     matchLabels:
       component: dockerkube-app
+  
+  updateStrategy:
+    roolingUpdate:
+      maxUnavailable: 1
+      type: RoolingUpdate

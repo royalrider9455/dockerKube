@@ -55,7 +55,7 @@
 		</form>
 
 		{% if get %}
-		<font color="blue">The Tech for <b>{{username}}</b> is <b>{{place}}</b> with <b>{{food}}</b></font>
+		<font color="blue">The Tech for <b>{{username}}</b> is <b>{{place}}</b> with Rating <b>{{food}}</b></font>
 		<small>{{msg}}</small>
 		{% endif %}
 
@@ -64,7 +64,7 @@
 		{% endif %}
 
 		{% if user_exists %}
-		<font color="red">User <b>{{username}}</b> already exists with the tech list of <b>{{place}}</b> with <b>{{food}}</b>
+		<font color="red">User <b>{{username}}</b> already exists with the tech list of <b>{{place}}</b> with Rating <b>{{food}}</b>
 		</font>
 		<small>{{msg}}</small>
 		{% endif %}
