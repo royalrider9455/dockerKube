@@ -2,16 +2,16 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class TraineerTech(db.Model):
-	name = db.Column(db.String, primary_key=True)
-	tech = db.Column(db.String)
-	rating = db.Column(db.String)
+class UserFavs(db.Model):
+	username = db.Column(db.String, primary_key=True)
+	place = db.Column(db.String)
+	food = db.Column(db.String)
 
-	def __init__(self, name, tech, rating):
-		self.name=name
-		self.tech=tech
-		self.rating=rating
+	def __init__(self, username, place, food):
+		self.username=username
+		self.place=place
+		self.food=food
 
 	def __repr__(self):
-		return f'<Name-Tech-Rating : {self.name}-{self.tech}-{self.rating}'
+		return f'<User-Place-Food : {self.username}-{self.place}-{self.food}'
 

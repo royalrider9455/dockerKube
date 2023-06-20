@@ -5,84 +5,87 @@
 		<h1>NAGP Docker and Kubernetes Assignment</h1>
 		<p>Create record for Training</p>
 		<div class="container">
-			<form action="/save" method="POST">
-				<div class="row">
-					<div class="col-25">
-						<label for="name">First Name</label>
-					</div>
-					<div class="col-75">
-						<input type="text" id="name" name="name" placeholder="Your name.." required>
-					</div>
+		<form action="/save" method="POST">
+
+			<div class="row">
+				<div class="col-25">
+					<label for="username">Name</label>
 				</div>
-				<div class="row">
-					<div class="col-25">
-						<label for="tech">Technology</label>
-					</div>
-					<div class="col-75">
-						<input type="text" id="tech" name="tech" placeholder="Your Technology.." required>
-					</div>
+				<div class="col-75">
+					<input type="text" name="username" id="username" placeholder="Your name.."required>
 				</div>
-				<div class="row">
-					<div class="col-25">
-						<label for="rating">Rating (1-10)</label>
-					</div>
-					<div class="col-75">
-						<input type="text" id="rating" name="rating" placeholder="Your Rating.." required>
-					</div>
+			</div>
+			<div class="row">
+				<div class="col-25">
+					<label for="place">Technology</label>
 				</div>
-				<br>
-				<div class="row">
-					<input type="submit" value="Save">
+				<div class="col-75">
+					<input type="text" name="place" id="place" placeholder="Your Technology.." required>
 				</div>
-			</form>
-
-			<b>Type in the username and fetch the WishList</b> <br>
-			<form action="/get" method="POST">
-				<div class="row">
-					<div class="col-25">
-						<label for="name">Name</label>
-					</div>
-					<div class="col-75">
-						<input type="text" id="name" name="name" placeholder="Search" required>
-					</div>
-				</div> <br>
-				<div class="row">
-					<input type="submit" value="Submit">
+			</div>
+			<div class="row">
+				<div class="col-25">
+					<label for="food">Rating (1-10)</label>
 				</div>
-			</form>
-
-			{% if get %}
-			<font color="blue">Details for <b>{{name}}</b> is <b>{{tech}}</b> and <b>{{rating}}</b></font>
-			<small>{{msg}}</small>
-			{% endif %}
-
-			{% if no_record %}
-			<font color="red">{{msg}}</font>
-			{% endif %}
-
-			{% if user_exists %}
-			<font color="red">Trainee <b>{{name}}</b> already exists with <b>{{tech}}</b> and <b>{{rating}}</b></font>
-			<small>{{msg}}</small>
-			{% endif %}
-
-			{% if saved %}
-			<font color="green"> Successfully saved data for <b>{{name}}</b> for <b>{{tech}}</b> and
-				<b>{{rating}}</b>!!!</font>
-			{% endif %}
-
+				<div class="col-75">
+					<input type="text" id="food" name="food" placeholder="Your Rating.." required>
+				</div>
+			</div>
 			<br>
-			<a href="/keys">Existing Records</a>
-			{% if keys %}
-			<h3> Traineers </h3>
-			<small>Existing records from Database</small>
-			<ul>
-				{% for name in names %}
-				<li>{{name}}</li>
-				{% endfor %}
-			</ul>
-			{% endif %}
-		</div>
+			<div class="row">
+				<input type="submit" value="Save">
+			</div>
+
+		</form>
+
+		<b>Type in the username and fetch the technology</b> <br>
+		<form action="/get" method="POST">
+			<div class="row">
+				<div class="col-25">
+					<label for="username">Name</label>
+				</div>
+				<div class="col-75">
+					<input type="text" id="username" name="username" placeholder="Search" required>
+				</div>
+			</div> <br>
+			<div class="row">
+				<input type="submit" value="Submit">
+			</div>
+
+		</form>
+
+		{% if get %}
+		<font color="blue">The Tech for <b>{{username}}</b> is <b>{{place}}</b> with <b>{{food}}</b></font>
+		<small>{{msg}}</small>
+		{% endif %}
+
+		{% if no_record %}
+		<font color="red">{{msg}}</font>
+		{% endif %}
+
+		{% if user_exists %}
+		<font color="red">User <b>{{username}}</b> already exists with the tech list of <b>{{place}}</b> with <b>{{food}}</b>
+		</font>
+		<small>{{msg}}</small>
+		{% endif %}
+
+		{% if saved %}
+		<font color="green"> Successfully saved data for <b>{{username}}</b> with Tech stack <b>{{place}}</b> and
+			<b>{{food}}</b>!!!</font>
+		{% endif %}
+	</div>
 	</center>
+	<br>
+	<a href="/keys">Get Existing Records</a>
+	{% if keys %}
+	<h3> Existing Records </h3>
+	<small>Below is the records from DataBase</small>
+	<ul>
+		{% for username in usernames %}
+		<li>{{username}}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
 </body>
 <style>
 	* {
