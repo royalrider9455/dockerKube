@@ -34,9 +34,9 @@ spec:
 
           env:
             - name: POSTGRES_USER
-              value: hello_flask
+              value: docker_kube
             - name: POSTGRES_DB
-              value: hello_flask_db
+              value: docker_kube_db
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
