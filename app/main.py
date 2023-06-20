@@ -40,8 +40,17 @@ def save():
     food = str(request.form['food']).lower()
 
     # check if data of the username already exists in the redis
-    record =  UserFavs.query.filter_by(username=username).first()
-    if record:
+    if red.hgetall(username).keys():
+        print("hget username:", red.hgetall(username))
+        # return a msg to the template, saying the user already exists(from redis)
+        return render_template('index.html', user_exists=1, msg='(From Redis)', username=username, place=red.hget(username,"place").decode('utf-8'), food=red.hget(username,"food").decode('utf-8'))
+
+    # if not in redis, then check in db
+    elif len(list(red.hgetall(username)))==0:
+        record =  UserFavs.query.filter_by(username=username).first()
+        print("Records fecthed from db:", record)
+        
+        if record:
             red.hset(username, "place", place)
             red.hset(username, "food", food)
             # return a msg to the template, saying the user already exists(from database)
@@ -53,9 +62,16 @@ def save():
     db.session.add(new_record)
     db.session.commit()
 
+    # store in Redis also
+    red.hset(username, "place", place)
+    red.hset(username, "food", food)
+
     # cross-checking if the record insertion was successful into database
     record =  UserFavs.query.filter_by(username=username).first()
     print("Records fetched from db after insert:", record)
+
+    # cross-checking if the insertion was successful into redis
+    print("key-values from redis after insert:", red.hgetall(username))
 
     # return a success message upon saving
     return render_template('index.html', saved=1, username=username, place=red.hget(username, "place").decode('utf-8'), food=red.hget(username, "food").decode('utf-8'))
