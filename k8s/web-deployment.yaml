@@ -5,7 +5,7 @@ metadata:
   name: web-deployment
 
 spec:
-  replicas: 4
+  replicas: 3
   template:
     metadata:
       labels:
@@ -17,14 +17,18 @@ spec:
           ports:
           - containerPort: 80
           env:
+            - name: REDIS_HOST
+              value: redis-service
+            - name: REDIS_PORT
+              value: '6379'
             - name: POSTGRES_HOST
               value: postgres-service
             - name: POSTGRES_USER
-              value: docker_kube
+              value: hello_flask
             - name: POSTGRES_PORT
               value: '5432'
             - name: POSTGRES_DB
-              value: docker_kube_db
+              value: hello_flask_db
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
