@@ -34,13 +34,13 @@ spec:
                 secretKeyRef:
                   name: pgpassword
                   key: PGPASSWORD
+      updateStrategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 1
 
   selector:
     matchLabels:
       component: dockerkube-app
   
-  updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
